@@ -380,6 +380,7 @@ class CreateRecipe extends Component {
       <button
         className="btn btn-primary btn-lg"
         onClick={this.handleSubmit}
+        data-testid="recipePublish"
       >
         Publish Recipe
       </button>
@@ -428,7 +429,7 @@ class CreateRecipe extends Component {
         multiple={false}
         style={dropZoneStyles}
       >
-        <div className="upload-recipe-img">
+        <div data-testid="upload-image" className="upload-recipe-img">
           <div className="row justify-content-center">
             <div className="col-12">
               <p className="text-center">
@@ -484,6 +485,7 @@ class CreateRecipe extends Component {
             placeholder="50 Naira Garri"
             type="text"
             name="ingredients"
+            data-testid={`recipeIngredient-${index}`}
             onBlur={(event) => { this.validateInput(event, index); }}
             onChange={(event) => { this.handleIngredientChange(event, index); }}
             value={this.state.ingredients[index]}
@@ -493,6 +495,7 @@ class CreateRecipe extends Component {
               className="btn btn-primary"
               type="button"
               onClick={() => { this.removeIngredient(index); }}
+              data-testid={`recipeIngredient-${index}-trash`}
             >
               <i className="ion ion-trash-b" style={{ color: 'white' }} />
             </button>
@@ -514,12 +517,13 @@ class CreateRecipe extends Component {
                 value={this.state.procedure[index]}
                 onBlur={(event) => { this.validateInput(event, index); }}
                 name="procedure"
+                data-testid={`recipeProcedure-${index}`}
                 placeholder="Mix the fufu with ..."
                 onChange={(event) => { this.handleProcedureChange(event, index); }}
                 type="text"
               />
               <span className="input-group-btn">
-                <button className="btn btn-primary" type="button" onClick={() => { this.removeProcedure(index); }}>
+                <button data-testid={`recipeProcedure-${index}-trash`}  className="btn btn-primary" type="button" onClick={() => { this.removeProcedure(index); }}>
                   <i className="ion ion-trash-b" style={{ color: 'white' }} />
                 </button>
               </span>
@@ -583,15 +587,15 @@ class CreateRecipe extends Component {
                 <div className="card-body">
                   <div className="form-group row">
                     <div className="col-sm-8">
-                      <input className="form-control" id="recipeTitle" onBlur={this.validateInput} name="title" value={this.state.title} onChange={this.handleInputChange} placeholder="Recipe title ..." type="text" />
+                      <input data-testid="recipeTitle" className="form-control" id="recipeTitle" onBlur={this.validateInput} name="title" value={this.state.title} onChange={this.handleInputChange} placeholder="Recipe title ..." type="text" />
                       {titleErrors}
                     </div>
                     <div className="col-sm-4">
-                      <input className="form-control" onBlur={this.validateInput} placeholder="How long to cook ?" value={this.state.timeToCook} onChange={this.handleInputChange} type="text" name="timeToCook" />
+                      <input data-testid="recipeTimeToCook" className="form-control" onBlur={this.validateInput} placeholder="How long to cook ?" value={this.state.timeToCook} onChange={this.handleInputChange} type="text" name="timeToCook" />
                       {timeToCookErrors}
                     </div>
                   </div>
-                  <textarea name="description" value={this.state.description} onBlur={this.validateInput} onChange={this.handleInputChange} placeholder="Tell the world about your recipe ..." cols={3} rows={3} className="form-control" />
+                  <textarea data-testid="recipeDescription" name="description" value={this.state.description} onBlur={this.validateInput} onChange={this.handleInputChange} placeholder="Tell the world about your recipe ..." cols={3} rows={3} className="form-control" />
                   {descriptionErrors}
                   <hr />
                   <h3 className="text-muted mb-3 mt-3">
